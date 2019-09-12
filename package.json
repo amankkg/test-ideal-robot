@@ -1,18 +1,63 @@
 {
   "private": true,
+  "scripts": {
+    "start": "next start",
+    "build": "next build",
+    "test": "jest --watch",
+    "dev": "next"
+  },
   "dependencies": {
     "next": "^9.0.5",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.1.0",
+    "@testing-library/react": "^9.1.4",
+    "@types/jest": "^24.0.18",
     "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/styled-components": "^4.1.19",
+    "@types/testing-library__react": "^9.1.1",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-styled-components": "^1.10.6",
     "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "now": "^16.2.0",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typescript": "^3.6.3"
+  },
+  "babel": {
+    "presets": [
+      "next/babel"
+    ],
+    "plugins": [
+      [
+        "babel-plugin-styled-components",
+        {
+          "ssr": true
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "."
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "bracketSpacing": false,
+    "singleQuote": true,
+    "trailingComma": "all"
   },
   "husky": {
     "hooks": {
