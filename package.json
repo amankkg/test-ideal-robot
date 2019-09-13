@@ -21,13 +21,13 @@
     "@types/react-dom": "^16.9.0",
     "@types/styled-components": "^4.1.19",
     "@types/testing-library__react": "^9.1.1",
-    "babel-jest": "^24.9.0",
     "babel-plugin-styled-components": "^1.10.6",
     "husky": "^3.0.5",
     "jest": "^24.9.0",
     "now": "^16.2.0",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
+    "ts-jest": "^24.1.0",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typescript": "^3.6.3"
   },
@@ -37,7 +37,7 @@
     ],
     "plugins": [
       [
-        "babel-plugin-styled-components",
+        "styled-components",
         {
           "ssr": true
         }
@@ -45,12 +45,19 @@
     ]
   },
   "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
     "moduleDirectories": [
       "node_modules",
       "."
     ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.jest.json"
+      }
+    },
     "setupFilesAfterEnv": [
-      "@testing-library/jest-dom/extend-expect"
+      "./test-setup.ts"
     ]
   },
   "prettier": {

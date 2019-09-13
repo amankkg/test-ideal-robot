@@ -1,14 +1,10 @@
-import {render} from '@testing-library/react'
+import * as React from 'react'
 import {ThemeProvider} from 'styled-components'
 
 import {theme} from './theming'
 
-const Wrapper = ({children}: any) => (
-  <ThemeProvider theme={theme}>{children}</ThemeProvider>
+type Props = {child: React.ReactChild}
+
+export const Wrapper = ({child}: Props) => (
+  <ThemeProvider theme={theme}>{child}</ThemeProvider>
 )
-
-const customRender = (ui: any, options: any) =>
-  render(ui, {wrapper: Wrapper, ...options})
-
-export * from '@testing-library/react'
-export {customRender as render}
