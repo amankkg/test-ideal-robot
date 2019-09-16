@@ -1,32 +1,35 @@
-// TODO:
-// - move to utility types
-// - add Entity base class or base type with identity field?
-// - `key` should be `T['id']` instead of string, but TS does not allow this
-export type IdMap<T> = {[key: string]: T}
+import {IdMap} from 'shared'
 
-export type Product = {
-  id: string
-  name: string
-  description: string | null
-  imageUri: string | null
+import {Product, Warehouse, State} from './domain'
+
+export const addNewProduct = (
+  product: Product,
+  unsorted: number,
+  distribution?: IdMap<number>,
+) => (state: State) => {
+  const stockSeed: IdMap<IdMap<number>> = {}
+
+  const stocks = Object.entries(state.stocks).reduce(
+    (acc, [warehouse, whStocks]) => {
+      acc[warehouse] = {
+        ...whStocks,
+        [product.id]: distribution ? distribution[warehouse] : 0,
+      }
+
+      return acc
+    },
+    stockSeed,
+  )
+
+  const next: State = {
+    ...state,
+    products: {...state.products, [product.id]: product},
+    stocks,
+    unsorted: {...state.unsorted, [product.id]: unsorted},
+  }
+
+  return next
 }
-
-export type Warehouse = {
-  id: string
-  label: string
-  address: string
-}
-
-export type State = {
-  products: IdMap<Product> // Product:id -> Product
-  warehouses: IdMap<Warehouse> // Warehouse:id -> Warehouse
-  stocks: IdMap<IdMap<number>> // Warehouse:id -> Product:id -> amount
-  unsorted: IdMap<number> // Product:id -> amount
-}
-
-// TODO:
-// - refactor immutable updates using lenses
-// - create custom errors
 
 export const moveGoods = (
   from: Warehouse['id'],

@@ -1,5 +1,5 @@
+import {Warehouse, State} from './domain'
 import {addWarehouse, removeWarehouse} from './warehouse'
-import {Warehouse, State} from './inventory'
 
 const initial: State = {
   products: {p1: {id: 'p1', name: '', description: null, imageUri: null}},
@@ -16,7 +16,7 @@ describe('addWarehouse', () => {
       label: '',
     }
 
-    const actual = addWarehouse(warehouse)()(initial)
+    const actual = addWarehouse(warehouse)(initial)
 
     expect(actual.warehouses.wh2).toEqual(warehouse)
     expect(actual.stocks).toHaveProperty('wh2.p1', 0)
@@ -31,7 +31,7 @@ describe('addWarehouse', () => {
       label: '',
     }
 
-    const actual = addWarehouse(warehouse)(stocks)(initial)
+    const actual = addWarehouse(warehouse, stocks)(initial)
 
     expect(actual.stocks.wh2.p1).toBe(42)
     expect(actual.unsorted.p1).toBe(0)
@@ -40,7 +40,7 @@ describe('addWarehouse', () => {
 
 describe('removeWarehouse', () => {
   it('should actually remove a warehouse and move the goods to unsorted', () => {
-    const actual = removeWarehouse('wh1')()(initial)
+    const actual = removeWarehouse('wh1')(initial)
 
     expect(actual.warehouses.wh1).not.toBeDefined()
     expect(actual.stocks.wh1).not.toBeDefined()
@@ -53,15 +53,15 @@ describe('removeWarehouse', () => {
       address: '',
       label: '',
     }
-    const preActual = addWarehouse(warehouse)()(initial)
-    const actual = removeWarehouse('wh1')('wh2')(preActual)
+    const preActual = addWarehouse(warehouse)(initial)
+    const actual = removeWarehouse('wh1', 'wh2')(preActual)
 
     expect(actual.stocks.wh2.p1).toBe(17)
   })
 
   // TODO: add more edge cases like this in other tests
   it('should throw if warehouse to remove is nonexistent', () => {
-    const action = () => removeWarehouse('wh2')()(initial)
+    const action = () => removeWarehouse('wh2')(initial)
 
     expect(action).toThrowErrorMatchingInlineSnapshot(
       `"Target warehouse is nonexistent."`,
@@ -69,7 +69,7 @@ describe('removeWarehouse', () => {
   })
 
   it('should throw if move-goods-to warehouse is nonexistent', () => {
-    const action = () => removeWarehouse('wh1')('wh2')(initial)
+    const action = () => removeWarehouse('wh1', 'wh2')(initial)
 
     expect(action).toThrowErrorMatchingInlineSnapshot(
       `"Move-goods-to warehouse is nonexistent."`,

@@ -1,11 +1,13 @@
-import {Warehouse, State, IdMap} from './inventory'
+import {IdMap} from 'shared'
+import {omit} from 'utils'
+
+import {Warehouse, State} from './domain'
 
 const stockSeed: IdMap<number> = {}
 
-// TODO: refactor for better readability, using loops at least
-export const addWarehouse = (warehouse: Warehouse) => (
-  stocks?: IdMap<number>,
-) => (state: State) => {
+export const addWarehouse = (warehouse: Warehouse, stocks?: IdMap<number>) => (
+  state: State,
+) => {
   const newStocks =
     stocks ||
     Object.keys(state.products).reduce(
@@ -33,15 +35,8 @@ export const addWarehouse = (warehouse: Warehouse) => (
   return next
 }
 
-// TODO: use 3rd party function with proper type inference
-type ObjMap<T> = {[key: string]: T}
-function omit<T>(key: string, obj: ObjMap<T>): ObjMap<T> {
-  return Object.entries(obj)
-    .filter(kv => kv[0] !== key)
-    .reduce((acc, [k, v]) => ({...acc, [k]: v}), {})
-}
-
-export const removeWarehouse = (id: Warehouse['id']) => (
+export const removeWarehouse = (
+  id: Warehouse['id'],
   toId?: Warehouse['id'],
 ) => (state: State) => {
   if (!state.stocks[id]) throw new Error('Target warehouse is nonexistent.')
