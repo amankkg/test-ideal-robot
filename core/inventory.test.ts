@@ -1,6 +1,6 @@
 import {moveGoods, State, moveGoodsToUnsorted} from './inventory'
 
-const state: State = {
+const initial: State = {
   products: {
     p1: {id: 'p1', name: '', description: null, imageUri: null},
   },
@@ -14,14 +14,14 @@ const state: State = {
 
 describe('moveGoods', () => {
   it('should actually move the goods between warehouses', () => {
-    const nextState = moveGoods('wh1', 'wh2', 'p1', 42)(state)
+    const actual = moveGoods('wh1', 'wh2', 'p1', 42)(initial)
 
-    expect(nextState.stocks.wh1.p1).toBe(0)
-    expect(nextState.stocks.wh2.p1).toBe(42)
+    expect(actual.stocks.wh1.p1).toBe(0)
+    expect(actual.stocks.wh2.p1).toBe(42)
   })
 
   it('should throw if given amount is greater than available', () => {
-    const action = () => moveGoods('wh1', 'wh2', 'p1', 146)(state)
+    const action = () => moveGoods('wh1', 'wh2', 'p1', 146)(initial)
 
     expect(action).toThrowErrorMatchingInlineSnapshot(
       `"Not enough stocks: requested to move 146 pcs, available 42 pcs only"`,
@@ -31,14 +31,14 @@ describe('moveGoods', () => {
 
 describe('moveGoodsToUnsorted', () => {
   it('should actually move the goods from warehouse to unsorted', () => {
-    const nextState = moveGoodsToUnsorted('wh1', 'p1', 42)(state)
+    const actual = moveGoodsToUnsorted('wh1', 'p1', 42)(initial)
 
-    expect(nextState.stocks.wh1.p1).toBe(0)
-    expect(nextState.unsorted.p1).toBe(42)
+    expect(actual.stocks.wh1.p1).toBe(0)
+    expect(actual.unsorted.p1).toBe(42)
   })
 
   it('should throw if given amount is greater than available', () => {
-    const action = () => moveGoodsToUnsorted('wh1', 'p1', 146)(state)
+    const action = () => moveGoodsToUnsorted('wh1', 'p1', 146)(initial)
 
     expect(action).toThrowErrorMatchingInlineSnapshot(
       `"Not enough stocks: requested to move 146 pcs, available 42 pcs only"`,

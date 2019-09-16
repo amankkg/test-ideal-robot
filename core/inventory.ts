@@ -1,6 +1,8 @@
-// TODO: add Entity base class or base type with identity field?
-// `key` should be `T['id']` instead of string, but TS does not allow this
-type IdMap<T> = {[key: string]: T}
+// TODO:
+// - move to utility types
+// - add Entity base class or base type with identity field?
+// - `key` should be `T['id']` instead of string, but TS does not allow this
+export type IdMap<T> = {[key: string]: T}
 
 export type Product = {
   id: string
