@@ -6,7 +6,7 @@ const stockSeed: IdMap<number> = {}
 export const addWarehouse = (warehouse: Warehouse) => (
   stocks?: IdMap<number>,
 ) => (state: State) => {
-  const whStocks =
+  const newStocks =
     stocks ||
     Object.keys(state.products).reduce(
       (acc, cur) => ({...acc, [cur]: 0}),
@@ -26,7 +26,7 @@ export const addWarehouse = (warehouse: Warehouse) => (
   const next: State = {
     ...state,
     warehouses: {...state.warehouses, [warehouse.id]: warehouse},
-    stocks: {...state.stocks, [warehouse.id]: whStocks},
+    stocks: {...state.stocks, [warehouse.id]: newStocks},
     unsorted,
   }
 
@@ -45,8 +45,10 @@ export const removeWarehouse = (id: Warehouse['id']) => (
   toId?: Warehouse['id'],
 ) => (state: State) => {
   if (!state.stocks[id]) throw new Error('Target warehouse is nonexistent.')
-  if (toId && !state.stocks[toId])
+
+  if (toId && !state.stocks[toId]) {
     throw new Error('Move-goods-to warehouse is nonexistent.')
+  }
 
   const stocks = omit(id, state.stocks)
 
