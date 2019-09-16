@@ -64,10 +64,11 @@ export const moveGoods = (
 ) => (state: State) => {
   const available = state.stocks[from][product]
 
-  if (available < amount)
+  if (available < amount) {
     throw new Error(
       `Not enough stocks: requested to move ${amount} pcs, available ${available} pcs only`,
     )
+  }
 
   const next: State = {
     ...state,
@@ -94,10 +95,11 @@ export const moveGoodsToUnsorted = (
 ) => (state: State) => {
   const available = state.stocks[from][product]
 
-  if (available < amount)
+  if (available < amount) {
     throw new Error(
       `Not enough stocks: requested to move ${amount} pcs, available ${available} pcs only`,
     )
+  }
 
   const next: State = {
     ...state,
