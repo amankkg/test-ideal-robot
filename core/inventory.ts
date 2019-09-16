@@ -22,19 +22,30 @@ export type State = {
   unsorted: IdMap<number> // Product:id -> amount
 }
 
+// TODO:
+// - refactor immutable updates using lenses
+// - create custom errors
+
 export const moveGoods = (
   from: Warehouse['id'],
   to: Warehouse['id'],
   product: Product['id'],
   amount: number,
 ) => (state: State) => {
-  return {
+  const available = state.stocks[from][product]
+
+  if (available < amount)
+    throw new Error(
+      `Not enough stocks: requested to move ${amount} pcs, available ${available} pcs only`,
+    )
+
+  const next: State = {
     ...state,
     stocks: {
       ...state.stocks,
       [from]: {
         ...state.stocks[from],
-        [product]: state.stocks[from][product] - amount,
+        [product]: available - amount,
       },
       [to]: {
         ...state.stocks[to],
@@ -42,6 +53,30 @@ export const moveGoods = (
       },
     },
   }
+
+  return next
 }
 
-// export const moveGoodsToUnsorted = (from: Warehouse['id'], product: Product['id'], amount: number) => (state: State) => {}
+export const moveGoodsToUnsorted = (
+  from: Warehouse['id'],
+  product: Product['id'],
+  amount: number,
+) => (state: State) => {
+  const available = state.stocks[from][product]
+
+  if (available < amount)
+    throw new Error(
+      `Not enough stocks: requested to move ${amount} pcs, available ${available} pcs only`,
+    )
+
+  const next: State = {
+    ...state,
+    stocks: {
+      ...state.stocks,
+      [from]: {...state.stocks[from], [product]: available - amount},
+    },
+    unsorted: {...state.unsorted, [product]: state.unsorted[product] + amount},
+  }
+
+  return next
+}
