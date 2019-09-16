@@ -1,15 +1,15 @@
-import {addWarehouse} from './warehouse'
+import {addWarehouse, removeWarehouse} from './warehouse'
 import {Warehouse, State} from './inventory'
 
 const initial: State = {
   products: {p1: {id: 'p1', name: '', description: null, imageUri: null}},
   warehouses: {wh1: {id: 'wh1', label: '', address: ''}},
-  stocks: {wh1: {p1: 0}},
+  stocks: {wh1: {p1: 17}},
   unsorted: {p1: 42},
 }
 
 describe('addWarehouse', () => {
-  it('should add a new warehouse and populate its empty stocks', () => {
+  it('should actually add a new warehouse and populate its empty stocks', () => {
     const warehouse: Warehouse = {
       id: 'wh2',
       address: '',
@@ -38,7 +38,41 @@ describe('addWarehouse', () => {
   })
 })
 
-// describe('removeWarehouse', () => {
-//   it ('should fail', () => {expect(true).toBe(false)})
-// }
-// )
+describe('removeWarehouse', () => {
+  it('should actually remove a warehouse and move the goods to unsorted', () => {
+    const actual = removeWarehouse('wh1')()(initial)
+
+    expect(actual.warehouses.wh1).not.toBeDefined()
+    expect(actual.stocks.wh1).not.toBeDefined()
+    expect(actual.unsorted.p1).toBe(42 + 17)
+  })
+
+  it('should move goods to another warehouse', () => {
+    const warehouse: Warehouse = {
+      id: 'wh2',
+      address: '',
+      label: '',
+    }
+    const preActual = addWarehouse(warehouse)()(initial)
+    const actual = removeWarehouse('wh1')('wh2')(preActual)
+
+    expect(actual.stocks.wh2.p1).toBe(17)
+  })
+
+  // TODO: add more edge cases like this in other tests
+  it('should throw if warehouse to remove is nonexistent', () => {
+    const action = () => removeWarehouse('wh2')()(initial)
+
+    expect(action).toThrowErrorMatchingInlineSnapshot(
+      `"Target warehouse is nonexistent."`,
+    )
+  })
+
+  it('should throw if move-goods-to warehouse is nonexistent', () => {
+    const action = () => removeWarehouse('wh1')('wh2')(initial)
+
+    expect(action).toThrowErrorMatchingInlineSnapshot(
+      `"Move-goods-to warehouse is nonexistent."`,
+    )
+  })
+})
