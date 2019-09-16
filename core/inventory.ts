@@ -2,13 +2,13 @@ import {IdMap} from 'shared'
 
 import {Product, Warehouse, State} from './domain'
 
+const stockSeed: IdMap<IdMap<number>> = {}
+
 export const addNewProduct = (
   product: Product,
   unsorted: number,
   distribution?: IdMap<number>,
 ) => (state: State) => {
-  const stockSeed: IdMap<IdMap<number>> = {}
-
   const stocks = Object.entries(state.stocks).reduce(
     (acc, [warehouse, whStocks]) => {
       acc[warehouse] = {
@@ -26,6 +26,31 @@ export const addNewProduct = (
     products: {...state.products, [product.id]: product},
     stocks,
     unsorted: {...state.unsorted, [product.id]: unsorted},
+  }
+
+  return next
+}
+
+export const repelnishStocks = (
+  id: Product['id'],
+  unsorted: number,
+  distribution?: IdMap<number>,
+) => (state: State) => {
+  const nextStocks = Object.entries(state.stocks).reduce(
+    (acc, [wh, stocks]) => ({
+      ...acc,
+      [wh]: {
+        ...stocks,
+        [id]: stocks[id] + (distribution ? distribution[wh] : 0),
+      },
+    }),
+    stockSeed,
+  )
+
+  const next: State = {
+    ...state,
+    stocks: nextStocks,
+    unsorted: {...state.unsorted, [id]: unsorted},
   }
 
   return next

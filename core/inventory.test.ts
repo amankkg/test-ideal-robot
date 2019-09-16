@@ -1,6 +1,11 @@
 import {State, Product} from './domain'
 
-import {addNewProduct, moveGoods, moveGoodsToUnsorted} from './inventory'
+import {
+  addNewProduct,
+  repelnishStocks,
+  moveGoods,
+  moveGoodsToUnsorted,
+} from './inventory'
 
 describe('addNewProduct', () => {
   const initial: State = {
@@ -37,6 +42,29 @@ describe('addNewProduct', () => {
 
     expect(actual.stocks.wh1.p2).toBe(17)
     expect(actual.unsorted.p2).toBe(42)
+  })
+})
+
+describe('repelnishStocks', () => {
+  const initial: State = {
+    products: {p1: {id: 'p1', name: '', description: null, imageUri: null}},
+    warehouses: {wh1: {id: 'wh1', label: '', address: ''}},
+    stocks: {wh1: {p1: 0}},
+    unsorted: {p1: 0},
+  }
+
+  it('should put all to unsorted', () => {
+    const actual = repelnishStocks('p1', 42)(initial)
+
+    expect(actual.stocks.wh1.p1).toBe(0)
+    expect(actual.unsorted.p1).toBe(42)
+  })
+
+  it('should distribute stocks among warehouses and unsorted', () => {
+    const actual = repelnishStocks('p1', 17, {wh1: 42})(initial)
+
+    expect(actual.stocks.wh1.p1).toBe(42)
+    expect(actual.unsorted.p1).toBe(17)
   })
 })
 
