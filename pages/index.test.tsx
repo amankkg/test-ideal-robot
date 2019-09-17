@@ -4,8 +4,8 @@ import {render, getByText} from '@testing-library/react'
 import {Wrapper} from 'test-utils'
 import Index from './index'
 
-test('index page loads', async () => {
+test('index page renders', async () => {
   const {container} = render(<Wrapper child={<Index />} />)
 
-  expect(getByText(container, 'Index')).toBeVisible()
+  expect(getByText(container, 'Products List')).toBeVisible()
 })

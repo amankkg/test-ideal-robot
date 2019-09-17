@@ -12,13 +12,14 @@ const Root = styled.header`
   }
 `
 
+// TODO: actual content shouldn't be hardcoded
 const Header = ({className}: {className?: string}) => (
   <Root className={className}>
     <Link href="/">
       <a>Products</a>
     </Link>
     <Link href="/wh">
-      <a>Warehouse</a>
+      <a>Warehouses</a>
     </Link>
     <Link href="/insights">
       <a>Insights</a>
