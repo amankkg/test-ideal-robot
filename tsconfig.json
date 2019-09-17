@@ -19,7 +19,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["cypress", "@types/testing-library__cypress"]
   },
   "exclude": ["node_modules", "**/*.test.ts", "**/*.test.tsx"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
