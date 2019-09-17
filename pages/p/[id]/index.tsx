@@ -1,15 +1,15 @@
 import * as React from 'react'
 import {useRouter} from 'next/router'
 
-import {Main} from 'templates'
+import {Details} from 'templates'
 
 const ProductPage = () => {
   const router = useRouter()
 
   return (
-    <Main>
+    <Details sidebar={<h1>sidebar</h1>}>
       <h1>#{router.query.id} product details</h1>
-    </Main>
+    </Details>
   )
 }
 

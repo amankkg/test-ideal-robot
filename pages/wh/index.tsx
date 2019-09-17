@@ -9,17 +9,17 @@ const WarehousesPage = () => (
     <ul>
       <li>
         <Link href="/wh/[id]" as="/wh/1">
-          warehouse #1
+          <a>warehouse #1</a>
         </Link>
       </li>
       <li>
         <Link href="/wh/[id]" as="/wh/2">
-          warehouse #2
+          <a>warehouse #2</a>
         </Link>
       </li>
       <li>
         <Link href="/wh/[id]" as="/wh/3">
-          warehouse #3
+          <a>warehouse #3</a>
         </Link>
       </li>
     </ul>
