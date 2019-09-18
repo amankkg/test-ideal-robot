@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {useRouter} from 'next/router'
 
-import {Details} from 'templates'
+import {Details} from '../../../ui/templates/details'
 
 const ProductPage = () => {
   const router = useRouter()

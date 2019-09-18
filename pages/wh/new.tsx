@@ -1,11 +1,11 @@
 import * as React from 'react'
 
-import {Main} from 'templates'
+import {List} from '../../ui/templates/list'
 
 const NewWarehousePage = () => (
-  <Main>
+  <List>
     <h1>New Warehouse</h1>
-  </Main>
+  </List>
 )
 
 export default NewWarehousePage

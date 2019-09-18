@@ -1,15 +1,15 @@
 import * as React from 'react'
 import {useRouter} from 'next/router'
 
-import {Main} from 'templates'
+import {List} from '../../../ui/templates/list'
 
 const EditProductPage = () => {
   const router = useRouter()
 
   return (
-    <Main>
+    <List>
       <h1>Edit Product #{router.query.id}</h1>
-    </Main>
+    </List>
   )
 }
 

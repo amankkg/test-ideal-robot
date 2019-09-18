@@ -1,6 +1,5 @@
-import {IdMap} from 'shared'
-import {omit} from 'utils'
-
+import {IdMap} from '../shared'
+import {omit} from '../utils'
 import {Warehouse, State} from './domain'
 
 const stockSeed: IdMap<number> = {}

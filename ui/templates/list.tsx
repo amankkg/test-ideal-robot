@@ -1,7 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
-import {Header, Footer} from 'organisms'
+import {Header} from '../organisms/header'
+import {Footer} from '../organisms/footer'
 
 const Container = styled.div`
   display: grid;
@@ -25,7 +26,7 @@ const FooterArea = styled(Footer)`
   align-self: end;
 `
 
-const Main = ({children}: {children: React.ReactNode}) => (
+const List = ({children}: {children: React.ReactNode}) => (
   <Container>
     <HeaderArea />
     <Content>{children}</Content>
@@ -33,4 +34,4 @@ const Main = ({children}: {children: React.ReactNode}) => (
   </Container>
 )
 
-export {Main}
+export {List}

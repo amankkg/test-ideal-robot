@@ -1,4 +1,4 @@
-import {IdMap} from 'shared'
+import {IdMap} from './shared'
 
 export function omit<T>(key: string, obj: IdMap<T>): IdMap<T> {
   return Object.entries(obj)

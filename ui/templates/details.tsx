@@ -1,7 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
-import {Header, Footer} from 'organisms'
+import {Header} from '../organisms/header'
+import {Footer} from '../organisms/footer'
 
 const Root = styled.div`
   display: grid;
@@ -24,6 +25,7 @@ const SidebarArea = styled.div`
 
 const MainArea = styled.div`
   grid-area: main;
+  background: ${props => props.theme.bgMain};
 `
 
 const FooterArea = styled(Footer)`

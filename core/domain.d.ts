@@ -1,6 +1,6 @@
-import {Entity, EntityMap, IdMap} from 'shared'
+import {Entity, EntityMap, IdMap} from '../shared'
 
-// TODO: in the context of warehouse accounting this should named as Operator/Employee/HeadOfWarehouse
+// TODO: in the context of warehouse accounting this should be named as Operator/Employee/HeadOfWarehouse
 export type User = Entity & {
   name: string
 }

@@ -1,10 +1,10 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import {Main} from 'templates'
+import {List} from '../../ui/templates/list'
 
 const WarehousesPage = () => (
-  <Main>
+  <List>
     <h1>Warehouses List</h1>
     <ul>
       <li>
@@ -23,7 +23,7 @@ const WarehousesPage = () => (
         </Link>
       </li>
     </ul>
-  </Main>
+  </List>
 )
 
 export default WarehousesPage

@@ -1,5 +1,4 @@
 import {State, Product} from './domain'
-
 import {
   addNewProduct,
   repelnishStocks,

@@ -1,11 +1,11 @@
 import * as React from 'react'
 
-import {Main} from 'templates'
+import {List} from '../../ui/templates/list'
 
 const NewPostPage = () => (
-  <Main>
+  <List>
     <h1>New Post</h1>
-  </Main>
+  </List>
 )
 
 export default NewPostPage
