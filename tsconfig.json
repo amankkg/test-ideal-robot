@@ -18,8 +18,9 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "types": ["cypress", "@types/testing-library__cypress"]
+    "isolatedModules": true
+    // TODO: enabling this breaks jest-dom's `expect` extension types
+    // "types": ["cypress", "@types/testing-library__cypress"]
   },
   "exclude": ["node_modules", "**/*.test.ts", "**/*.test.tsx"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
