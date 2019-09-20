@@ -1,15 +1,15 @@
 import * as React from 'react'
 import {useRouter} from 'next/router'
 
-import {List} from '../../../ui/templates/list'
+import {Default} from '../../../ui/templates/default'
 
 const RemoveWarehousePage = () => {
   const router = useRouter()
 
   return (
-    <List>
+    <Default>
       <h1>Removing warehouse #{router.query.id}?</h1>
-    </List>
+    </Default>
   )
 }
 

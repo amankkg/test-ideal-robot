@@ -2,7 +2,7 @@ import * as React from 'react'
 import {render, getByText} from '@testing-library/react'
 
 import {Wrapper} from '../test-utils'
-import Index from '../pages'
+import Index from '../pages/p'
 
 test.skip('index page renders', async () => {
   const {container} = render(<Wrapper child={<Index />} />)

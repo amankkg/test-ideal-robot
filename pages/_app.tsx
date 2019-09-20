@@ -1,7 +1,17 @@
 import App from 'next/app'
-import {ThemeProvider} from 'styled-components'
+import {ThemeProvider, DefaultTheme, createGlobalStyle} from 'styled-components'
 
-import {theme} from '../theming'
+const theme: DefaultTheme = {
+  fg: 'palevioletred',
+  bg: 'white',
+  bgMain: '#fafafa',
+}
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    padding: 8px;
+  }
+`
 
 export default class MyApp extends App {
   render() {
@@ -9,7 +19,10 @@ export default class MyApp extends App {
 
     return (
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <>
+          <Component {...pageProps} />
+          <GlobalStyle />
+        </>
       </ThemeProvider>
     )
   }

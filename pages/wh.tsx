@@ -1,11 +1,14 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import {List} from '../../ui/templates/list'
+import {Default} from '../ui/templates/default'
 
 const WarehousesPage = () => (
-  <List>
+  <Default>
     <h1>Warehouses List</h1>
+    <Link href="/wh/new">
+      <a>create new</a>
+    </Link>
     <ul>
       <li>
         <Link href="/wh/[id]" as="/wh/1">
@@ -23,7 +26,7 @@ const WarehousesPage = () => (
         </Link>
       </li>
     </ul>
-  </List>
+  </Default>
 )
 
 export default WarehousesPage

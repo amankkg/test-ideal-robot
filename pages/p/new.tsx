@@ -1,11 +1,26 @@
 import * as React from 'react'
+import newId from 'nanoid'
+import styled from 'styled-components'
+import Router from 'next/router'
 
-import {List} from '../../ui/templates/list'
+import {Default} from '../../ui/templates/default'
+import {ProductForm} from '../../ui/organisms/product-form'
 
-const NewPostPage = () => (
-  <List>
-    <h1>New Post</h1>
-  </List>
+const StyledForm = styled(ProductForm)`
+  max-width: 400px;
+  max-height: 250px;
+`
+
+const NewProductPage = () => (
+  <Default>
+    <h1>New product</h1>
+    <StyledForm
+      onSubmit={p => {
+        console.log('created a product: $0', {id: newId(), ...p})
+        Router.push('/p')
+      }}
+    />
+  </Default>
 )
 
-export default NewPostPage
+export default NewProductPage

@@ -9,6 +9,7 @@ const Root = styled.footer`
   color: gray;
 `
 
+// TODO: actual content shouldn't be hardcoded
 const Footer = ({className}: {className?: string}) => (
   <Root className={className}>Ⓒ 2019</Root>
 )

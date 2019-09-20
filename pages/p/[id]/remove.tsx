@@ -1,15 +1,15 @@
 import * as React from 'react'
 import {useRouter} from 'next/router'
 
-import {List} from '../../../ui/templates/list'
+import {Default} from '../../../ui/templates/default'
 
 const RemoveProductPage = () => {
   const router = useRouter()
 
   return (
-    <List>
+    <Default>
       <h1>Removing product #{router.query.id}?</h1>
-    </List>
+    </Default>
   )
 }
 

@@ -1,7 +1,11 @@
 import * as React from 'react'
-import {ThemeProvider} from 'styled-components'
+import {ThemeProvider, DefaultTheme} from 'styled-components'
 
-import {theme} from './theming'
+const theme: DefaultTheme = {
+  fg: 'blue',
+  bg: 'red',
+  bgMain: 'brown',
+}
 
 type Props = {child: React.ReactChild}
 

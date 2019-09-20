@@ -26,7 +26,7 @@ const FooterArea = styled(Footer)`
   align-self: end;
 `
 
-const List = ({children}: {children: React.ReactNode}) => (
+const Default = ({children}: {children: React.ReactNode}) => (
   <Container>
     <HeaderArea />
     <Content>{children}</Content>
@@ -34,4 +34,4 @@ const List = ({children}: {children: React.ReactNode}) => (
   </Container>
 )
 
-export {List}
+export {Default}
