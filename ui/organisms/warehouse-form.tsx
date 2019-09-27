@@ -48,8 +48,6 @@ const WarehouseForm = ({
     props.onSubmit({label, address})
   }
 
-  const labelError = label.length <= 1 ? 'name is too short' : false // + check for uniquiness
-
   return (
     <Form {...props} onSubmit={onSubmit}>
       <Field
@@ -59,7 +57,6 @@ const WarehouseForm = ({
         onChange={e => {
           setLabel(e.target.value)
         }}
-        error={labelError}
         required
       />
       <Field
@@ -69,11 +66,10 @@ const WarehouseForm = ({
         onChange={e => {
           setAddress(e.target.value)
         }}
+        required
       />
       <CancelButton onClick={() => router.back()}>cancel</CancelButton>
-      <SubmitButton type="submit" disabled={!!labelError}>
-        submit
-      </SubmitButton>
+      <SubmitButton type="submit">submit</SubmitButton>
     </Form>
   )
 }

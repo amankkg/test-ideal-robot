@@ -13,7 +13,7 @@ const StyledForm = styled(WarehouseForm)`
 
 const NewWarehousePage = () => (
   <Default>
-    <h1>New arehouse</h1>
+    <h1>New warehouse</h1>
     <StyledForm
       onSubmit={wh => {
         console.log('created a warehouse: $0', {id: newId(), ...wh})
